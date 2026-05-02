@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Love ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #120014, #2d0b45, #5a1d4d, #1a0028);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .floating-hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      color: rgba(255,255,255,0.2);
+      animation: floatUp linear infinite;
+      font-size: 20px;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 10%;
+      position: relative;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 30px;
+      padding: 50px;
+      width: 100%;
+      max-width: 900px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 4rem;
+      font-family: 'Great Vibes', cursive;
+      margin-bottom: 20px;
+      color: #ffd6f6;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #ffd6f6;
+    }
+
+    p {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: #f8e9ff;
+    }
+
+    .soft-text {
+      font-size: 1.3rem;
+      margin-top: 20px;
+      opacity: 0.95;
+    }
+
+    .hug-circle {
+      width: 240px;
+      height: 240px;
+      margin: 30px auto;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ff8fd6, #7a2b67);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.4rem;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 50px rgba(255, 105, 180, 0.5);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .message-box {
+      margin-top: 30px;
+      padding: 25px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .kiss {
+      font-size: 5rem;
+      animation: floatKiss 2.5s infinite ease-in-out;
+    }
+
+    @keyframes floatKiss {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .scroll-down {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1rem;
+      opacity: 0.8;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%,100% { transform: translate(-50%,0); }
+      50% { transform: translate(-50%,10px); }
+    }
+
+    .stars {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(white 1px, transparent 1px);
+      background-size: 50px 50px;
+      opacity: 0.08;
+      z-index: -2;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px;
+      color: #ffd9f6;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(90deg, #ff85c2, #ffb6f2);
+      color: #3d0038;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255,255,255,0.4);
+    }
+
+    .hidden-message {
+      display: none;
+      margin-top: 25px;
+      font-size: 1.2rem;
+      color: #fff0fa;
+    }
+
+    @media(max-width: 768px) {
+      h1 {
+        font-size: 2.8rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .glass {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="floating-hearts"></div>
+
+  <div class="stars"></div>
+
+  <!-- Background Music -->
+  <div id="musicControl" style="position:fixed; top:20px; right:20px; z-index:1000;">
+    <button onclick="playMusic()" style="padding:12px 22px; border:none; border-radius:40px; background:linear-gradient(90deg,#ff85c2,#ffd1f0); color:#4b003f; font-weight:bold; cursor:pointer; box-shadow:0 0 20px rgba(255,255,255,0.25);">
+      🎵 Play Our Song
+    </button>
+  </div>
+
+  <div id="youtube-player"></div>
+
+  <script>
+    let player;
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('youtube-player', {
+        height: '0',
+        width: '0',
+        videoId: '-BjZmE2gtdo',
+        playerVars: {
+          autoplay: 0,
+          loop: 1,
+          playlist: '-BjZmE2gtdo'
+        }
+      });
+    }
+
+    function playMusic() {
+      if (player) {
+        player.playVideo();
+      }
+    }
+  </script>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <section>
+    <div class="glass">
+      <h1>Hey Beautiful ❤️</h1>
+      <p>
+        I know the distance feels heavy sometimes... especially on days when you just want to be held close, kissed softly, and wrapped in warmth.
+      </p>
+
+      <div class="hug-circle">
+        Sending You The Warmest Hug 🤍
+      </div>
+
+      <p class="soft-text">
+        Close your eyes for a second and imagine my arms around you, gently pulling you close while I whisper:
+        <br><br>
+        “I'm here... always.”
+      </p>
+
+      <div class="scroll-down">Scroll Slowly ↓</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="glass">
+      <h2>For Your Tough Days 🌙</h2>
+
+      <p>
+        I know periods can make everything feel overwhelming — the cramps, the emotions, the exhaustion.
+        If I were there right now, I'd hold your hand, make you comfortable, bring your favorite snacks, tuck you into a blanket, and kiss your forehead until you fell asleep peacefully.
+      </p>
+
+      <div class="message-box">
+        <p>
+          Drink some warm water for me 💕<br>
+          Rest your beautiful mind 🌸<br>
+          And remember: you never have to go through hard days alone.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="glass">
+      <h2>A Kiss Across The Distance 💋</h2>
+
+      <div class="kiss">💋</div>
+
+      <p>
+        Imagine me gently holding your face, brushing your hair back, looking into your eyes...
+        and giving you the softest kiss full of love, comfort, and reassurance.
+      </p>
+
+      <div class="message-box">
+        <p>
+          Distance can delay touch — but it can never weaken what I feel for you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="glass">
+      <h2>Your Safe Place 🤍</h2>
+
+      <p>
+        Whenever the loneliness hits, come back to this page.
+        Let the music play.
+        Read these words slowly.
+        Feel my love in every sentence.
+      </p>
+
+      <button onclick="showMessage()">Tap For A Special Message</button>
+
+      <div class="hidden-message" id="loveMessage">
+        No matter how many miles separate us,
+        I will always choose you,
+        protect your heart,
+        comfort your soul,
+        and love you deeply.
+        <br><br>
+        You are my favorite person in this entire world ❤️
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="glass">
+      <h1>I Love You 🌹</h1>
+
+      <p>
+        One day,
+        there will be no distance.
+        No screens.
+        No waiting.
+      </p>
+
+      <p class="soft-text">
+        Just us.
+        Long hugs.
+        Forehead kisses.
+        Late-night cuddles.
+        And peaceful moments together.
+      </p>
+
+      <div class="hug-circle">
+        Forever Yours ❤️
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    Made with love, warmth, and endless cuddles ✨
+  </div>
+
+  <script>
+    const container = document.querySelector('.floating-hearts');
+
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (5 + Math.random() * 8) + 's';
+      heart.style.fontSize = (15 + Math.random() * 30) + 'px';
+      container.appendChild(heart);
+    }
+
+    function showMessage() {
+      document.getElementById('loveMessage').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
